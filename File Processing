@@ -1,0 +1,43 @@
+"""
+This program prompts the user for the name of an external data file, reads the
+contents of the file, and reports the number of characters, the word count,
+and the number of lines in the file.
+"""
+import os #Learned this method at https://docs.python.org/2/library/os.path.html
+
+def getValidFilename():
+    filename = input("What is the name of the file you would like to process? ")
+    while(not os.path.isfile(filename)):
+        filename = input("Error. What is the name of the file you would like to process? ")
+    return filename
+
+filename = getValidFilename()
+with open(filename, "r") as dataFile:
+    contents = dataFile.read()
+    characterCount = len(contents)
+    wordCount = 1 #Initialized to 1 to account for last word in file not having a space or return after
+    lineCount = 1 #initialized to 1 to account for last line in file not having a return after
+    for index in range (len(contents)):
+        if contents[index] == " ":
+            wordCount = wordCount + 1
+        elif contents[index] == "\n":
+            wordCount = wordCount + 1
+            lineCount = lineCount + 1
+
+
+print(contents)
+print("The number of characters in the file is: ", characterCount)
+print("The word count is: ", wordCount)
+print("The number of lines is: ", lineCount)
+
+"""
+OUTPUT:
+What is the name of the file you would like to process? x
+Error. What is the name of the file you would like to process? data
+Now is the time
+for all good humans to
+come to the aid of their planet
+The number of characters in the file is:  70
+The word count is:  16
+The number of lines is:  3
+"""
