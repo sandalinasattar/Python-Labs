@@ -1,0 +1,189 @@
+"""
+This program creates a reusable class made up of instance methods that
+store and identify the ingredients within the sandwich. The test program
+then calculates the price of the sandwich based off of this information.
+"""
+class Sandwich:
+    """
+    One object of this class represents one sandwich made at a deli.
+    """
+    def __init__(self, name):
+        """
+        Method name: __init__
+        Initializing all instance variables so program doesn't
+        crash if user calls print in main function out of order.
+        No return value.
+        """
+        self.name = name
+        self.bread = None
+        self.cheese = None
+        self.meat = None
+        self.condiments = [None]
+        self.toasted = None
+
+    def setBread(self, breadName):
+        """
+        Method name: setBread
+        Sets bread instance variable to bread parameter.
+        No return value.
+        """
+        self.bread = breadName
+
+    def setCheese(self, cheeseName):
+        """
+        Method name: setCheese
+        Sets cheese instance variable to cheese parameter.
+        No return value.
+        """
+        self.cheese = cheeseName
+
+    def setMeat(self, meatName):
+        """
+        Method name: setMeat
+        Sets meat instance variable to meat parameter.
+        No return value.
+        """
+        self.meat = meatName
+
+    def addCondiment(self, additionalCondiment):
+        """
+        Method name: addCondiment
+        Adds additional condiments to list containing
+        condiments in instance variable.
+        No return value.
+        """
+        if None in self.condiments:
+            self.condiments.remove(None)
+        self.condiments.append(additionalCondiment)
+        #Learned code for this method: https://stackoverflow.com/questions/12920561/python-list-remove-append
+
+    def setToasted (self, isToasted):
+        """
+        Method name: setToasted
+        Sets toasted instance value to true if the toasted parameter
+        is true (meaning sandwich is toasted).
+        No return value.
+        """
+        if isToasted == True:
+            self.toasted = isToasted
+        else:
+            self.toasted = False
+
+    def __str__(self):
+        """
+        Method name: __str__
+        Returns a string containing a list of all the ingredients
+        in the sandwich and indicates whether or not the sandwich
+        is toasted.
+        """
+        returnValue = str(self.name + ":")
+        if self.bread != None:
+            returnValue = returnValue + " " + self.bread + ","
+        if self.cheese != None:
+            returnValue = returnValue + " " + self.cheese + ","
+        if self.meat != None:
+            returnValue = returnValue + " " + self.meat + ","
+        if self.condiments != [None]:
+            returnValue = returnValue + " " + str(self.condiments) + ","
+        if self.toasted == True:
+            returnValue = returnValue + " " + "toasted"
+        else:
+            returnValue = returnValue + " " + "not toasted"
+        return str(returnValue)
+
+    def price(self):
+        """
+        Method name: price
+        Calculates the final price of the sandwich based off of the
+        ingredients inside the sandwich. Returns price float value.
+        """
+        price = 4.50
+        if self.meat != None:
+            price = price + 1
+        price = price + 0.5 * (len(self.condiments) - 1)
+        return price
+
+#TEST 1 MAIN FUNCTION
+s = Sandwich("Bennie")
+print (s)
+print (s.price())
+s.setBread("wheat")
+print (s)
+print (s.price())
+s.setCheese("Cheddar")
+print (s)
+print (s.price())
+s.setMeat("turkey")
+print(s)
+print (s.price())
+s.addCondiment("mayo")
+print (s)
+print (s.price())
+s.addCondiment("mustard")
+print (s)
+print (s.price())
+s.addCondiment("lettuce")
+print (s)
+print (s.price())
+s.setToasted(True)
+print (s)
+print (s.price())
+
+#TEST 2 MAIN FUNCTION
+s = Sandwich("Sandalina")
+print (s)
+print (s.price())
+s.setBread("white")
+print (s)
+print (s.price())
+s.setCheese("pepper jack")
+print (s)
+print (s.price())
+s.setMeat("roast beef")
+print(s)
+print (s.price())
+s.addCondiment("onions")
+print (s)
+print (s.price())
+s.addCondiment("tomatoes")
+print (s)
+print (s.price())
+s.setToasted(False)
+print (s)
+print (s.price())
+
+"""
+OUTPUT 1:
+Bennie: not toasted
+4.5
+Bennie: wheat, not toasted
+4.5
+Bennie: wheat, Cheddar, not toasted
+4.5
+Bennie: wheat, Cheddar, turkey, not toasted
+5.5
+Bennie: wheat, Cheddar, turkey, ['mayo'], not toasted
+5.5
+Bennie: wheat, Cheddar, turkey, ['mayo', 'mustard'], not toasted
+6.0
+Bennie: wheat, Cheddar, turkey, ['mayo', 'mustard', 'lettuce'], not toasted
+6.5
+Bennie: wheat, Cheddar, turkey, ['mayo', 'mustard', 'lettuce'], toasted
+6.5
+
+OUTPUT 2:
+Sandalina: not toasted
+4.5
+Sandalina: white, not toasted
+4.5
+Sandalina: white, pepper jack, not toasted
+4.5
+Sandalina: white, pepper jack, roast beef, not toasted
+5.5
+Sandalina: white, pepper jack, roast beef, ['onions'], not toasted
+5.5
+Sandalina: white, pepper jack, roast beef, ['onions', 'tomatoes'], not toasted
+6.0
+Sandalina: white, pepper jack, roast beef, ['onions', 'tomatoes'], not toasted
+6.0
+"""
