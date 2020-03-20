@@ -1,0 +1,68 @@
+"""
+This program prompts the user for the name of an external data file, reads the external data file,
+analyzes its contents, stores data in a dictionary, and reports the frequency of each letter of
+the alphabet within the file.
+"""
+
+import os #Learned this method at https://docs.python.org/2/library/os.path.html
+
+def getValidFilename():
+    """
+    This function takes no parameter, and simply confirms whether or not the
+    external data file name that the user inputs exists. This function returns filename,
+    a string containing the name of the data file confirmed to exist.
+    """
+    filename = input("What is the name of the file you would like to process? ")
+    while(not os.path.isfile(filename)):
+        filename = input("Error. What is the name of the file you would like to process? ")
+    return filename
+
+filename = getValidFilename()
+
+with open(filename, "r") as dataFile: #Opens filename for reading
+    contents = dataFile.read() #Reads contents of file and assigns to contents variable
+    contents = contents.lower() #Converts contents of file to all lowercase
+    letterCounters = {} #Creates empty dictionary to store letter counters later
+    totalLetters = 0 #Initializes total number of letters counter to 0
+
+    for letter in contents: #Goes through file contents character by character
+        if letter.isalpha(): #Learned from https://stackoverflow.com/questions/15558392/how-to-check-if-character-in-string-is-a-letter-python
+            if letter not in letterCounters.keys(): #If letter is not already a key in dictionary
+                letterCounters[letter] = 1 #Add key to dictionary and set key value equal to 1
+            else: #Key is already in dictionary
+                letterCounters[letter] = letterCounters[letter] + 1 #Add 1 to dictionary key value counting that letter's occurence
+            totalLetters = totalLetters + 1 #Add 1 to overall total number of letters counter each time file content is a letter
+
+    for key in sorted(letterCounters.keys()): #Goes through each key in dictionary in alphabetic order
+        print(f"The frequency of letter {key} is {(letterCounters[key]/totalLetters)*100:.2f}%") #Prints result to two decimal places
+
+"""
+OUTPUT:
+What is the name of the file you would like to process? input.txt
+The frequency of letter a is 3.85%
+The frequency of letter b is 3.85%
+The frequency of letter c is 3.85%
+The frequency of letter d is 3.85%
+The frequency of letter e is 3.85%
+The frequency of letter f is 3.85%
+The frequency of letter g is 3.85%
+The frequency of letter h is 3.85%
+The frequency of letter i is 3.85%
+The frequency of letter j is 3.85%
+The frequency of letter k is 3.85%
+The frequency of letter l is 3.85%
+The frequency of letter m is 3.85%
+The frequency of letter n is 3.85%
+The frequency of letter o is 3.85%
+The frequency of letter p is 3.85%
+The frequency of letter q is 3.85%
+The frequency of letter r is 3.85%
+The frequency of letter s is 3.85%
+The frequency of letter t is 3.85%
+The frequency of letter u is 3.85%
+The frequency of letter v is 3.85%
+The frequency of letter w is 3.85%
+The frequency of letter x is 3.85%
+The frequency of letter y is 3.85%
+The frequency of letter z is 3.85%
+"""
