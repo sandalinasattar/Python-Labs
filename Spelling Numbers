@@ -1,0 +1,127 @@
+"""
+This program contains 5 functions that are helpful for spelling out numbers
+between -1 billion and 1 billion.
+"""
+
+def digitName(digit):
+    """"
+    Returns a string containing the English word naming "digit".
+    "digit" must be between 1 and 9, inclusive.
+    """
+    if digit == 1: name = "one "
+    elif digit == 2: name = "two "
+    elif digit == 3: name = "three "
+    elif digit == 4: name = "four "
+    elif digit == 5: name = "five "
+    elif digit == 6: name = "six "
+    elif digit == 7: name = "seven "
+    elif digit == 8: name = "eight "
+    elif digit == 9: name = "nine "
+    else: name = ""
+    return name
+
+def teenName(number):
+    """
+    Returns a string containing the English word naming "number".
+    "number" must be between 10 and nineteen, inclusive.
+    """
+    if number == 10: name = "ten "
+    elif number == 11: name = "eleven "
+    elif number == 12: name = "twelve "
+    elif number == 13: name = "thirteen "
+    elif number == 14: name = "fourteen "
+    elif number == 15: name = "fifteen "
+    elif number == 16: name = "sixteen "
+    elif number == 17: name = "seventeen "
+    elif number == 18: name = "eighteen "
+    elif number == 19: name = "nineteen "
+    return name
+
+def tensName(number):
+    """
+    Returns a string containing the English word for just the tens part of "number".
+    "number" must be an integer between 20 and 99 inclusive.
+    """
+    if number >= 90: name = "ninety "
+    elif number>= 80: name = "eighty "
+    elif number>= 70: name = "seventy "
+    elif number>= 60: name = "sixty "
+    elif number>= 50: name = "fifty "
+    elif number>= 40: name = "forty "
+    elif number>= 30: name = "thirty "
+    elif number>= 20: name = "twenty "
+    return name
+
+def spellNumberLessThanThousand(number):
+    """
+    Returns a string containing the English words that spell out "number".
+    "number" must be between 0 and 1000, exclusive.
+    """
+    part = number
+    name = ""
+    if part >= 100:
+        name = digitName(part//100) + "hundred "
+        part = part % 100
+    if part >= 20:
+        name = name + tensName(part)
+        part = part % 10
+    elif part >= 10:
+        name = name + teenName(part)
+        part = 0
+    if part >= 0:
+        name = name + digitName(part)
+    return name
+
+def spell(number):
+    """
+    Returns a string variable "name" containing the English words that spell
+    out parameter integer variable "number". "number" must be between -1,000,000,000 and
+    1,000,000,000, exclusive.
+    """
+
+    part = number
+    name = ""
+
+    if part < 0:
+        part = -1*part
+        name = "negative "
+    elif part == 0:
+        name = "zero"
+
+    if part >= 1000000000:
+        name = "Number out of range."
+        part = 0
+
+    if part >= 1000000:
+        name = name + spellNumberLessThanThousand(part//1000000) + "million "
+        part = part % 1000000
+
+    if part >= 1000:
+        name = name + spellNumberLessThanThousand(part//1000) + "thousand "
+        part = part % 1000
+
+    if part > 0:
+        name = name + spellNumberLessThanThousand(part)
+
+    return name
+
+print(spell(123456789))
+print(spell(456678))
+print(spell(66))
+print(spell(-123456789))
+print(spell(-456678))
+print(spell(-418))
+print(spell(0))
+print(spell(10004))
+
+"""
+OUTPUT:
+one hundred twenty three million four hundred fifty six thousand seven hundred eighty nine
+four hundred fifty six thousand six hundred seventy eight
+sixty six
+negative one hundred twenty three million four hundred fifty six thousand seven hundred eighty nine
+negative four hundred fifty six thousand six hundred seventy eight
+negative four hundred eighteen
+zero
+ten thousand four
+"""
