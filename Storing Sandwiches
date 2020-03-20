@@ -1,0 +1,154 @@
+"""
+This program creates a reusable class made up of instance methods that
+store and identify the ingredients within the sandwich. The test program
+then calculates the price of the sandwich based off of this information.
+The test program also writes the class objects into a pickle file and then
+reads the data into new objects.
+"""
+
+import pickle
+
+class Sandwich:
+    """
+    One object of this class represents one sandwich made at a deli.
+    """
+    def __init__(self, name):
+        """
+        Method name: __init__
+        Initializing all instance variables so program doesn't
+        crash if user calls print in main function out of order.
+        No return value.
+        """
+        self.name = name
+        self.bread = None
+        self.cheese = None
+        self.meat = None
+        self.condiments = [] #Fixed from assignment 9
+        self.toasted = None
+
+    def setBread(self, breadName):
+        """
+        Method name: setBread
+        Sets bread instance variable to bread parameter.
+        No return value.
+        """
+        self.bread = breadName
+
+    def setCheese(self, cheeseName):
+        """
+        Method name: setCheese
+        Sets cheese instance variable to cheese parameter.
+        No return value.
+        """
+        self.cheese = cheeseName
+
+    def setMeat(self, meatName):
+        """
+        Method name: setMeat
+        Sets meat instance variable to meat parameter.
+        No return value.
+        """
+        self.meat = meatName
+
+    def addCondiment(self, additionalCondiment):
+        """
+        Method name: addCondiment
+        Adds additional condiments to list containing
+        condiments in instance variable.
+        No return value.
+        """
+        if None in self.condiments:
+            self.condiments.remove(None)
+        self.condiments.append(additionalCondiment)
+        #Learned code for this method: https://stackoverflow.com/questions/12920561/python-list-remove-append
+
+    def setToasted (self, isToasted):
+        """
+        Method name: setToasted
+        Sets toasted instance value to true if the toasted parameter
+        is true (meaning sandwich is toasted).
+        No return value.
+        """
+        self.toasted = isToasted #Fixed from assignment 9
+
+    def __str__(self):
+        """
+        Method name: __str__
+        Returns a string containing a list of all the ingredients
+        in the sandwich and indicates whether or not the sandwich
+        is toasted.
+        """
+        returnValue = self.name + ":" #Fixed from assignment 9
+        if self.bread != None:
+            returnValue = returnValue + " " + self.bread + ","
+        if self.cheese != None:
+            returnValue = returnValue + " " + self.cheese + ","
+        if self.meat != None:
+            returnValue = returnValue + " " + self.meat + ","
+        if self.condiments != [None]:
+            returnValue = returnValue + " " + str(self.condiments) + ","
+        if self.toasted == True:
+            returnValue = returnValue + " " + "toasted"
+        else:
+            returnValue = returnValue + " " + "not toasted"
+        return str(returnValue)
+
+    def price(self):
+        """
+        Method name: price
+        Calculates the final price of the sandwich based off of the
+        ingredients inside the sandwich. Returns price float value.
+        """
+        price = 4.50
+        if self.meat != None:
+            price = price + 1
+        price = price + 0.5 * (len(self.condiments) - 1)
+        return price
+
+#MAIN FUNCTION using pickle file
+if __name__ == "__main__":
+    s1 = Sandwich("Peter")
+    s1.setBread("whole wheat")
+    s1.setCheese("pepper jack")
+    s1.setMeat("turkey")
+    s1.addCondiment("pickles")
+    s1.addCondiment("ketchup")
+    s1.addCondiment("lettuce")
+    s1.setToasted(True)
+    print(s1)
+    print(s1.price())
+
+    s2 = Sandwich("Sandy")
+    s2.setBread("white")
+    s2.setCheese("american")
+    s2.setMeat("chicken")
+    s2.addCondiment("onions")
+    s2.addCondiment("tomatoes")
+    s2.setToasted(False)
+    print(s2)
+    print(s2.price())
+
+    datafile = open("data.pkl", "wb")
+    pickle.dump(s1, datafile)
+    pickle.dump(s2, datafile)
+    datafile.close()
+
+    datafile = open("data.pkl", "rb")
+    s3 = pickle.load(datafile)
+    s4 = pickle.load(datafile)
+    print(s3)
+    print(s3.price())
+    print(s4)
+    print(s4.price())
+
+"""
+OUTPUT:
+Peter: whole wheat, pepper jack, turkey, ['pickles', 'ketchup', 'lettuce'], toasted
+6.5
+Sandy: white, american, chicken, ['onions', 'tomatoes'], not toasted
+6.0
+Peter: whole wheat, pepper jack, turkey, ['pickles', 'ketchup', 'lettuce'], toasted
+6.5
+Sandy: white, american, chicken, ['onions', 'tomatoes'], not toasted
+6.0
+"""
