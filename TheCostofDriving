@@ -1,0 +1,29 @@
+#This program calculates and prints the cost of driving a car for 100 miles and the mileage left in the car
+
+fuelEfficiency = float(input("What is the fuel efficiency of your car in miles per gallon? "))
+gasPrice = float(input("What is the price of gas per gallon? $"))
+currentGas = int(input("How many gallons of gas are currently in your tank? "))
+
+drivingCost = float((100/fuelEfficiency)*gasPrice)
+print(f"The cost of the gas used when driving 100 miles is ${drivingCost:.2f}")
+
+currentMiles = int(currentGas*fuelEfficiency)
+print(f"The number of miles the car can go with the gas currently in the tank is {currentMiles}")
+
+"""
+OUTPUT 1
+What is the fuel efficiency of your car in miles per gallon? 32.4
+What is the price of gas per gallon? $4.13
+How many gallons of gas are currently in your tank? 2
+The cost of the gas used when driving 100 miles is $12.75
+The number of miles the car can go with the gas currently in the tank is 64
+
+OUTPUT 2
+What is the fuel efficiency of your car in miles per gallon? 27.48
+What is the price of gas per gallon? $3.99
+How many gallons of gas are currently in your tank? 6
+The cost of the gas used when driving 100 miles is $14.52
+The number of miles the car can go with the gas currently in the tank is 164
+"""
+
+#Note to self: My C++ version cpp.sh/9tpoh
