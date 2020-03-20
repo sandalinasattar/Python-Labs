@@ -1,0 +1,123 @@
+"""
+This program contains a series of API functions.
+"""
+
+"""
+swapFirstAndLast API:
+This function takes a Python list as a parameter and modifies the list
+parameter by swapping its first and last elements. Does not return anything.
+"""
+def swapFirstAndLast (list):
+    valueOne = list[0]
+    list [0] = list[len(list)-1]
+    list[len(list)-1] = valueOne
+
+""""
+shiftRight API:
+This function takes a Python list as parameter and modifies the list
+parameter by shifting all elements in the list to the right and putting
+the last (rightmost) element in the zeroth position of the list. Does not
+return anything.
+"""
+def shiftRight (list):
+    tempList = [None]*len(list)
+    #Learned Line 19 format from:
+    #https://stackoverflow.com/questions/10712002/create-an-empty-list-in-python-with-certain-size
+    for index in range(1, len(list)):
+        tempList[index] = list[index-1]
+    tempList[0] = list[len(list)-1]
+    for index in range (len(tempList)):
+        list[index] = tempList[index]
+
+"""
+double API:
+Takes a python list as a parameter and modifies the list parameter
+by doubling the value of each element in the list. Does not return
+anything.
+"""
+def double(list):
+    for index in range (len(list)):
+        list[index] = 2*list[index]
+
+"""
+isSorted API:
+Takes a python list as a parameter and returns True if the list
+parameter is in sorted order, returns False otherwise. You can
+assume the list parameter has only numbers in it.
+"""
+def isSorted(list):
+    for index in range (1,len(list)):
+        if list[index] < list[index-1]:
+            return False
+    return True
+
+"""
+replaceEvens API:
+Takes a Python list as a parameter and replaces any even elements
+of the list parameter with zero. This looks at the value of the element
+to see if it is even, the index of the element does not determine if the
+element is replaced with a 0 in the list. Does not return anything.
+"""
+def replaceEvens(list):
+    for index in range(len(list)):
+        if list[index]%2==0:
+            list[index] = 0
+
+
+#tests swapFirstAndLast()
+myList = [1,4,2,9]
+print(myList)
+swapFirstAndLast(myList)
+print(myList)
+
+#tests shiftRight()
+myList = [1,4,2,9]
+print(myList)
+shiftRight(myList)
+print(myList)
+
+#tests double()
+myList = [1,4,2,9]
+print(myList)
+double(myList)
+print(myList)
+
+#test isSorted()
+myList = [1,4,2,9]
+if isSorted(myList):
+    print("myList is sorted")
+else:
+    print("myList is not sorted")
+myOtherList = [-4,0,10,99]
+if isSorted(myOtherList):
+    print("myOtherList is sorted")
+else:
+    print("myOtherList is not sorted")
+
+#tests replaceEvens()
+myList = [1,4,2,9]
+print(myList)
+replaceEvens(myList)
+print(myList)
+
+"""
+swapFirstAndLast() OUTPUT:
+[1, 4, 2, 9]
+[9, 4, 2, 1]
+
+shiftRight() OUTPUT:
+[1, 4, 2, 9]
+[9, 1, 4, 2]
+
+double() OUTPUT:
+[1, 4, 2, 9]
+[2, 8, 4, 18]
+
+isSorted() OUTPUT:
+myList is not sorted
+myOtherList is sorted
+
+replaceEvens() OUTPUT:
+[1, 4, 2, 9]
+[1, 0, 0, 9]
+"""
