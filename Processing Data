@@ -1,0 +1,93 @@
+"""
+This program reads a sequence of integer inputs and prints the total of all inputs,
+the smallest & largest of inputs, the number of even & odd inputs, and the average
+of all the inputs.
+"""
+print("This program will calculate statistics for your integer data.")
+firstValue = int(input("Please type a number: "))
+count = 1
+smallestNumber = firstValue
+largestNumber = firstValue
+total = firstValue
+if (firstValue % 2 == 0):
+    evenCount = 1
+    oddCount = 0
+else:
+    evenCount = 0
+    oddCount = 1
+repeatCommand = input("Do you have another number to enter (Y/N)? ")
+
+while (repeatCommand == "Y"):
+    newValue = int(input("Please type a number: "))
+    count = count + 1
+    total = total + newValue
+
+    if (newValue % 2 == 0):
+        evenCount = evenCount + 1
+    else:
+        oddCount = oddCount + 1
+
+    if (newValue < smallestNumber):
+        smallestNumber = newValue
+    if (newValue > largestNumber):
+        largestNumber = newValue
+
+    repeatCommand = input("Do you have another number to enter (Y/N)? ")
+
+print ()
+print("The total of your numbers is: ", total)
+print ("The smallest of your numbers is: ", smallestNumber)
+print("The largest of your numbers is: ", largestNumber)
+print("The number of even numbers is: ", evenCount)
+print("The number of odd numbers is: ", oddCount)
+print("The average of your numbers is: ", total/count)
+
+"""
+OUPTUT 1:
+This program will calculate statistics for your integer data.
+Please type a number: 7
+Do you have another number to enter (Y/N)? Y
+Please type a number: -13
+Do you have another number to enter (Y/N)? Y
+Please type a number: -3
+Do you have another number to enter (Y/N)? Y
+Please type a number: 99
+Do you have another number to enter (Y/N)? N
+
+The total of your numbers is:  90
+The smallest of your numbers is:  -13
+The largest of your numbers is:  99
+The number of even numbers is:  0
+The number of odd numbers is:  4
+The average of your numbers is:  22.5
+
+OUTPUT 2:
+This program will calculate statistics for your integer data.
+Please type a number: 100
+Do you have another number to enter (Y/N)? N
+
+The total of your numbers is:  100
+The smallest of your numbers is:  100
+The largest of your numbers is:  100
+The number of even numbers is:  1
+The number of odd numbers is:  0
+The average of your numbers is:  100.0
+
+OUTPUT 3:
+This program will calculate statistics for your integer data.
+Please type a number: -10
+Do you have another number to enter (Y/N)? Y
+Please type a number: 7
+Do you have another number to enter (Y/N)? Y
+Please type a number: -13
+Do you have another number to enter (Y/N)? Y
+Please type a number: 50
+Do you have another number to enter (Y/N)? N
+
+The total of your numbers is:  34
+The smallest of your numbers is:  -13
+The largest of your numbers is:  50
+The number of even numbers is:  2
+The number of odd numbers is:  2
+The average of your numbers is:  8.5
+"""
