@@ -1,0 +1,54 @@
+#This program calculates and prints the premium one must pay for their car insurance based on user input
+
+driverAge = int(input("Driver's Age? "))
+ticketNumber = int(input("Number of Tickets? "))
+carValue = int(input("Value of Car? "))
+
+premiumPart = float(carValue*.05)
+
+if driverAge < 25:
+    premiumValue = premiumPart*1.15
+elif driverAge >= 25 and driverAge <= 29:
+    premiumValue = premiumPart*1.1
+else:
+    premiumValue = premiumPart
+
+if ticketNumber == 1:
+    premiumValue = 1.1*premiumValue
+elif ticketNumber == 2:
+    premiumValue = 1.25*premiumValue
+elif ticketNumber == 3:
+    premiumValue = 1.5*premiumValue
+elif ticketNumber > 3:
+    premiumValue = 0
+
+print(f"Premium: ${premiumValue:.2f}")
+
+
+""""
+OUTPUT 1
+Driver's Age? 35
+Number of Tickets? 1
+Value of Car? 10000
+Premium: $550.00
+
+OUTPUT 2
+Driver's Age? 29
+Number of Tickets? 2
+Value of Car? 15000
+Premium: $1031.25
+
+OUTPUT 3
+Driver's Age? 19
+Number of Tickets? 3
+Value of Car? 850
+Premium: $73.31
+
+OUTPUT 4
+Driver's Age? 81
+Number of Tickets? 4
+Value of Car? 12500
+Premium: $0.00
+"""
+
+#Note to self: My C++ version cpp.sh/6ajr4
